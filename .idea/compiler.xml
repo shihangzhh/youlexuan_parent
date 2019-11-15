@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="youlexuan_cart_interface" />
+        <module name="youlexuan_cart_service" />
+        <module name="youlexuan_cart_web" />
+        <module name="youlexuan_common" />
+        <module name="youlexuan_content_interface" />
+        <module name="youlexuan_content_service" />
+        <module name="youlexuan_dao" />
+        <module name="youlexuan_manager_web" />
+        <module name="youlexuan_order_interface" />
+        <module name="youlexuan_order_service" />
+        <module name="youlexuan_page_interface" />
+        <module name="youlexuan_page_service" />
+        <module name="youlexuan_page_web" />
+        <module name="youlexuan_pay_interface" />
+        <module name="youlexuan_pay_service" />
+        <module name="youlexuan_pojo" />
+        <module name="youlexuan_portal_web" />
+        <module name="youlexuan_search_interface" />
+        <module name="youlexuan_search_service" />
+        <module name="youlexuan_search_web" />
+        <module name="youlexuan_seckill_interface" />
+        <module name="youlexuan_seckill_service" />
+        <module name="youlexuan_seckill_web" />
+        <module name="youlexuan_sellergoods_interface" />
+        <module name="youlexuan_sellergoods_service" />
+        <module name="youlexuan_shop_web" />
+        <module name="youlexuan_sms_service" />
+        <module name="youlexuan_solr_util" />
+        <module name="youlexuan_user_interface" />
+        <module name="youlexuan_user_service" />
+        <module name="youlexuan_user_web" />
+      </profile>
+    </annotationProcessing>
+  </component>
+</project>

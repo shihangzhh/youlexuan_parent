@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="com.offcn.page.service.impl"></context:component-scan>
+
+    <!--真正可以产生Connection的ConnectionFactory由对应的JMS服务厂商提供-->
+    <bean id="targetConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+        <property name="brokerURL" value="tcp://192.168.188.134:61616"></property>
+    </bean>
+
+    <!-- Spring 用于管理真正的 ConnectionFactory 的 ConnectionFactory -->
+    <bean id="connectionFactory" class="org.springframework.jms.connection.SingleConnectionFactory">
+        <!-- 目标 ConnectionFactory 对应真实的可以产生 JMS Connection 的 ConnectionFactory -->
+        <property name="targetConnectionFactory" ref="targetConnectionFactory"></property>
+    </bean>
+    <!-- Spring 提供的 JMS 工具类，它可以进行消息发送、接收等 -->
+    <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+        <!-- 这个 connectionFactory 对应的是我们定义的 Spring 提供的那个 ConnectionFactory
+对象 -->
+        <property name="connectionFactory" ref="connectionFactory"></property>
+
+    </bean>
+
+    <!--这个是订阅 文本信息  新增队列-->
+<bean id="topicPageDestination" class="org.apache.activemq.command.ActiveMQTopic">
+   <constructor-arg value="youlexuan_topic_page"></constructor-arg>
+</bean>
+
+    <!--创建接收要删除静态页面的主题-->
+    <bean id="topicDeletePageDestination" class="org.apache.activemq.command.ActiveMQTopic">
+        <constructor-arg value="youlexuan_delete_page_topic"></constructor-arg>
+    </bean>
+    <!--我的监听类-->
+
+    <!--消息监听容器-->
+<!--监控新增容器-->
+    <bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="connectionFactory" ref="connectionFactory"></property>
+        <property name="destination" ref="topicPageDestination"></property>
+        <property name="messageListener" ref="pageListener"></property>
+
+    </bean>
+
+
+    <!--监控删除容器-->
+    <bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="connectionFactory" ref="connectionFactory"></property>
+        <property name="destination" ref="topicDeletePageDestination"></property>
+        <property name="messageListener" ref="itemPageDeleteListener"></property>
+
+    </bean>
+
+
+
+</beans>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+   <!-- <context:property-placeholder location="classpath*:properties/*.properties"/>-->
+    <!-- 指定dubbo发布生产者服务端口-->
+    <dubbo:protocol name="dubbo" port="20901"></dubbo:protocol>
+    <dubbo:application name="youlexuan_seckill_service">
+        <dubbo:parameter key="qos.enable" value="false"/>
+    </dubbo:application>
+    <dubbo:registry address="zookeeper://192.168.188.134:2181"/>
+    <dubbo:annotation package="com.offcn.seckill.service.impl" />
+
+    <!-- 配置idWorker id生成器-->
+    <bean id="idWorker" class="com.offcn.util.IdWorker">
+        <!-- 进程id-->
+        <constructor-arg index="0" value="2"/>
+        <!-- 数据中心编号-->
+        <constructor-arg index="1" value="2"/>
+    </bean>
+
+   <!-- &lt;!&ndash; 配置支付宝调用客户端对象&ndash;&gt;
+    <bean id="payClient" class="com.alipay.api.DefaultAlipayClient">
+        <constructor-arg name="appId" value="${appId}"/>
+        <constructor-arg name="serverUrl" value="${serverUrl}"/>
+        <constructor-arg name="privateKey" value="${privateKey}"/>
+        <constructor-arg name="alipayPublicKey" value="${alipayPulicKey}"/>
+        <constructor-arg name="format" value="${format}"/>
+        <constructor-arg name="charset" value="${charset}"/>
+        <constructor-arg name="signType" value="${signType}"/>
+    </bean>-->
+</beans>
