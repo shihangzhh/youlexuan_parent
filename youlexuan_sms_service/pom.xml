@@ -14,7 +14,7 @@
 
     <properties>
         <webVersion>3.0</webVersion>
-        <spring.version>4.3.10.RELEASE</spring.version>
+        <spring.version>5.2.20.RELEASE</spring.version>
     </properties>
 
     <dependencies>
